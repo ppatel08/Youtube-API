@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="youtubePlayer">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Test Project</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+  <script src="js/script.js"></script>
+
+</head>
+
+<body ng-cloak ng-controller="youtubePlayerController as vm">
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="#"><span class="menu" ng-click="vm.showMenu = true"><i class="fa fa-bars" aria-hidden="true"></i></span> Youtube API
+      Player</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="nav-menu" ng-if="vm.showMenu">
+      <a class="dropdown-item" href="#" ng-click="vm.playMovie(movie, movie.videoId)"
+        ng-repeat="movie in vm.movies">{{movie.title}}</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto"></ul>
+      <div class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+          ng-model="searchMovie" />
+        <button type="button" class="btn btn-outline-success my-2 my-sm-0"
+          ng-click="vm.search(searchMovie)">Search</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main">
+    <div class="row">
+      <div class="player col-lg-8 col-sm-12 col-xs-12">
+        <div class="title bg-white">
+          <h2>{{ vm.selectedMovie.title }}</h2>
+        </div>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" ng-src="{{vm.playerUrl}}" allowfullscreen></iframe>
+        </div>
+        <div class="details bg-white">
+          <div class="stats row">
+            <div class="col-lg-8 col-sm-12 col-xs-12 channel">
+              {{ vm.selectedMovie.channel }}
+            </div>
+            <div class="col-lg-4 col-sm-12 col-xs-12 views">
+              <span class="count">{{ vm.selectedMovie.stats.viewCount | number }}</span>
+              <span class="label">views</span>
+              <div class="likes">
+                <span class="like" ng-if="vm.selectedMovie.stats.likeCount"><i class="far fa-thumbs-up"></i>
+                  {{ vm.selectedMovie.stats.likeCount | number }} </span>
+                <span class="dislike" ng-if="vm.selectedMovie.stats.likeCount"><i class="far fa-thumbs-down"></i>
+                  {{vm.selectedMovie.stats.dislikeCount | number }} </span>
+              </div>
+            </div>
+          </div>
+          <div class="description">
+            {{ vm.selectedMovie.description }}
+          </div>
+        </div>
+      </div>
+      <div class="playlist col-lg-4 col-sm-12 col-xs-12">
+        <div class="card w-100" ng-repeat="movie in vm.movies">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <img class="card-img-top" ng-src="{{movie.thumbnail.url}}"
+                  ng-click="vm.playMovie(movie, movie.videoId)">
+              </div>
+              <div class="col-9">
+                <h5 class="card-title">{{ movie.title }}</h5>
+                <p class="card-text">{{ movie.channel }}</p>
+                <p class="card-text">{{ movie.description }}</p>
+                <p class=""> {{ movie.stats.viewCount | number }} views</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
