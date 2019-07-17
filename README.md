@@ -7,3 +7,5 @@ The purpose of this repository is for user to find the various Youtube video usi
 - Calling Google API
 - Display set of result
 - Parsing the Json data dynamically and displaying inside the project. Such as View, Comment, Information, Title
+
+![alt text](..//master/YoutubeApi/img/youtubeAPI.PNG)
