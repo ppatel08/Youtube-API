@@ -60,7 +60,7 @@ angular.module('youtubePlayer', [])
 
 	.factory('youtubeAPI', ['$window', '$http', '$q', function (window, http, $q) {
 		var apiBase = 'https://www.googleapis.com/youtube/v3/';
-		var apiKey = 'AIzaSyDJ6288fsxOZ_QNRR193RIQJaQiIMAO7tc';
+		var apiKey = 'Your API Key';
 		var api = this;
 
 		api.getVideos = getVideos;
